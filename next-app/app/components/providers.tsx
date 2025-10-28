@@ -14,7 +14,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     return (
          <NextThemeProvider 
             attribute="class" 
-            defaultTheme="dark" 
+            defaultTheme="system" 
             enableSystem
             disableTransitionOnChange>
                 <AuthUIProvider
