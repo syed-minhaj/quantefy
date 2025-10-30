@@ -31,7 +31,7 @@ export default function SideBar() {
             <div className="px-4 flex flex-col gap-1 flex-1 group sideBar-child ">
                 {Pages.map((page, index) => (
                     <Link href={`/app/${page}`} key={index} 
-                        className={` ${open ? "w-52 " : "w-9.5"} rounded border flex flex-row items-center  transition-all duration-500 ease-in-out group-hover:w-52
+                        className={` ${open ? "w-52 " : "w-9.5"} rounded-[0.5rem] border flex flex-row items-center  transition-all duration-500 ease-in-out group-hover:w-52
                         ${pathname.split("/app/").at(-1) == page ? "bg-prePrimary  border-black/20" : "border-transparent"} 
                         p-2 px-2 leading-none font-medium text-black/85 `} >
                         <IconComponent page={page} />
