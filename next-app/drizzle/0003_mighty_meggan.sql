@@ -1,0 +1,1 @@
+ALTER TABLE "store" ALTER COLUMN "logo" DROP NOT NULL;
