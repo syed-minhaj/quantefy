@@ -22,7 +22,7 @@ export default function SideBar({store}:{store:string}) {
     
 
     return (
-        <div className={`${open ? "w-60" : "w-17.5"} hidden sticky top-0 h-screen bg-sidebar sm:flex flex-col  transition-all duration-300 ease-in-out sideBar-parent  `}>
+        <div className={`${open ? "w-60" : "w-17.5"} hidden sticky top-0 h-screen bg-bg2 sm:flex flex-col  transition-all duration-300 ease-in-out sideBar-parent  `}>
             <div className="h-16 flex flex-row pt-4 pl-6">
                 <h1 className={`font-bold ${open ? "w-32" : "w-0"} overflow-hidden transition-all duration-300 ease-in-out logo `}>Quantefy</h1>
                 <MoveLeft className={` absolute right-5.75 p-1 text-black/85 border border-black/20 rounded  ${open ? "" : "rotate-180 "} `} 
@@ -32,7 +32,7 @@ export default function SideBar({store}:{store:string}) {
                 {Pages.map((page, index) => (
                     <Link href={`/app/store/${store}/${page}`} key={index} 
                         className={` ${open ? "w-52 " : "w-9.5"} rounded-[0.5rem] border flex flex-row items-center  transition-all duration-300 ease-in-out group-hover:w-52
-                        ${pathname.split(`/app/store/${store}/`).at(-1) == page ? "bg-prePrimary  border-black/20" : "border-transparent"} 
+                        ${pathname.split(`/app/store/${store}/`).at(-1) == page ? "bg-bg1  border-black/20" : "border-transparent"} 
                         p-2 px-2 leading-none font-medium text-black/85 `} >
                         <IconComponent page={page} />
                         <span className={`${open ? "w-24" : "w-0 "} overflow-hidden whitespace-nowrap  transition-all duration-300 ease-in-out group-hover:w-24 `}>
