@@ -12,7 +12,7 @@ export const orderMethodEnum = pgEnum("orderMethod", ["mannul","api"])
 export const store = pgTable("store", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),
     name: text("name").notNull(),
-    description: text("description").notNull(),
+    description: text("description"),
     logo: text("logo"),
     owner_id: text("owner_id").notNull().references(() => user.id, { onDelete: "cascade" }),
     created_at: timestamp("created_at").notNull().defaultNow(),
@@ -26,8 +26,7 @@ export const storeRelation = relations(store , ({many}) =>({
 export const item = pgTable("item", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),
     name: text("name").notNull(),
-    description: text("description"),
-    picture: text("picture"),
+    picture: text("picture").notNull(),
     store_id: text("store_id").notNull(),
     quantity: integer("quantity").notNull().default(0),
     sale_price : real("sale_price").notNull(),
