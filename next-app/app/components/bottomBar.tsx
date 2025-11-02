@@ -23,6 +23,7 @@ export default function BottomBar({store}:{store:string}) {
             {Pages.map((page, index) => (
                 <Link href={`/app/store/${store}/${page}`} key={index} 
                     className={`  rounded-r1 border flex flex-col items-center text-sm transition-all duration-300 ease-in-out
+                    hover:bg-bg1 hover:border-black/10 
                     ${pathname.split(`/app/store/${store}/`).at(-1) == page ? "bg-bg1  border-black/20" : "border-transparent"} 
                     p-2 px-2 leading-none font-medium text-black/85 `} >
                     <IconComponent page={page} />
