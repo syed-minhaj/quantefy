@@ -22,7 +22,7 @@ export default function BottomBar({store}:{store:string}) {
         <div className="sm:hidden flex flex-row w-full h-16 bg-bg2 sticky bottom-0 justify-around items-center ">
             {Pages.map((page, index) => (
                 <Link href={`/app/store/${store}/${page}`} key={index} 
-                    className={`  rounded-[0.5rem] border flex flex-col items-center text-sm transition-all duration-300 ease-in-out
+                    className={`  rounded-r1 border flex flex-col items-center text-sm transition-all duration-300 ease-in-out
                     ${pathname.split(`/app/store/${store}/`).at(-1) == page ? "bg-bg1  border-black/20" : "border-transparent"} 
                     p-2 px-2 leading-none font-medium text-black/85 `} >
                     <IconComponent page={page} />
