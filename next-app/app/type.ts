@@ -9,4 +9,16 @@ type store = {
     updated_at: Date;
 }
 
-export type { store };
+type item = {
+    id: string;
+    name: string;
+    picture: string;
+    store_id: string;
+    quantity: number;
+    sale_price: number;
+    cost_price: number;
+    created_at: Date;
+    updated_at: Date;
+}
+
+export type { store , item };
