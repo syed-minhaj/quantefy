@@ -84,3 +84,37 @@ export const addItem = async (name:string , price:number , cost:number , quantit
     return {err : null}
 
 }
+
+export async function updateItem(name:string , price:number , cost:number , quantity:number , storeID:string , itemID:string) {
+    
+    const session = await auth.api.getSession({headers: await headers()});
+    if (!session) return {err : "Sign in to create store"};
+    if(name == "") return {err : "Name is required"};
+    if(price < 0) return {err : "Price cannot be negative"};
+    if(cost < 0) return {err : "Cost cannot be negative"};
+    if(quantity < 0) return {err : "Quantity cannot be negative"};
+    
+    const s = await db.select().from(store).where(eq(store.id , storeID));
+    if(s[0].owner_id != session.user.id) return {err : "You are not the owner of this store"};
+    const i = await db.select().from(item).where(eq(item.id , itemID));
+    if(i[0].store_id != storeID) return {err : "item is not in this store"};
+
+    try{
+        await db.update(item)
+                    .set({
+                        name,
+                        sale_price : price,
+                        cost_price : cost,
+                        quantity,
+                    })
+                    .where(eq(item.id , itemID));
+            
+        revalidatePath(`/app/store/${storeID}/inventory`);
+        
+    }catch(e){
+        console.log(e)
+        return {err : "Failed to create store"}
+    }
+    return {err : null}
+
+}

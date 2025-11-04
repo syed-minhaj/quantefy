@@ -7,6 +7,7 @@ import { db } from "@/app/lib/drizzle";
 import { eq } from "drizzle-orm";
 import AddItem from "./components/additems";
 import Item from "./components/item";
+import ItemDetals from "./components/itemDetals";
 
 
 async function Main({storeID}:{storeID:string}) {
@@ -20,11 +21,12 @@ async function Main({storeID}:{storeID:string}) {
 
     return (
         <div className="flex flex-row">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-1 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-1  ">
                 {items.map((item) => (
                     <Item item={item} />
                 ))}
             </div>
+            <ItemDetals storeID={storeID} items={items} />
         </div>
     )
 }
