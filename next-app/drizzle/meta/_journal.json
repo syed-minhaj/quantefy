@@ -50,6 +50,13 @@
       "when": 1762082591092,
       "tag": "0006_keen_sphinx",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1762243498629,
+      "tag": "0007_black_baron_strucker",
+      "breakpoints": true
     }
   ]
 }

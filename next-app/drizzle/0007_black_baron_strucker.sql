@@ -1,0 +1,1 @@
+ALTER TABLE "order" ADD COLUMN "store_id" text NOT NULL;

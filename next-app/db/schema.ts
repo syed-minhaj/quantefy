@@ -21,6 +21,7 @@ export const store = pgTable("store", {
 
 export const storeRelation = relations(store , ({many}) =>({
     items: many(item),
+    orders: many(order),
 }));
 
 export const item = pgTable("item", {
@@ -46,6 +47,7 @@ export const itemRelation = relations(item , ({one , many}) =>({
 export const order = pgTable("order", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),
     item_id: text("item_id").notNull(),
+    store_id: text("store_id").notNull(),
     quantity: text("quantity").notNull(),
     total_price: real("total_price").notNull(),
     method : orderMethodEnum("method").notNull().$type<OrderMethod>(),
@@ -56,5 +58,9 @@ export const orderRelation = relations(order , ({one}) =>({
     item: one(item, {
         fields: [order.item_id,],
         references: [item.id,],
+    }),
+    store: one(store, {
+        fields: [order.store_id,],
+        references: [store.id,],
     }),
 }));
