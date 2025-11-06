@@ -21,4 +21,17 @@ type item = {
     updated_at: Date;
 }
 
-export type { store , item };
+type order = {
+    id: string;
+    created_at: Date;
+    store_id: string;
+    quantity: number;
+    item_id: string;
+    price_per_unit: number;
+    cost_per_unit: number;
+    method: OrderMethod;
+}
+
+type OrderMethod = "manual" | "api";
+
+export type { store , item  , OrderMethod , order };
