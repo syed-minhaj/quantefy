@@ -5,9 +5,9 @@ import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp , integer, real, pgEnum } from "drizzle-orm/pg-core";
 import { user } from "./auth-schema";
 import { randomUUID } from "crypto";
+import { OrderMethod } from "@/app/type";
 
-type OrderMethod = "mannul" | "api";
-export const orderMethodEnum = pgEnum("orderMethod", ["mannul","api"])
+export const orderMethodEnum = pgEnum("orderMethod", ["manual","api"])
 
 export const store = pgTable("store", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),
@@ -28,7 +28,7 @@ export const item = pgTable("item", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),
     name: text("name").notNull(),
     picture: text("picture").notNull(),
-    store_id: text("store_id").notNull(),
+    store_id: text("store_id").notNull().references(() => store.id, { onDelete: "cascade" }),
     quantity: integer("quantity").notNull().default(0),
     sale_price : real("sale_price").notNull(),
     cost_price : real("cost_price").notNull(),
@@ -46,10 +46,11 @@ export const itemRelation = relations(item , ({one , many}) =>({
 
 export const order = pgTable("order", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),
-    item_id: text("item_id").notNull(),
-    store_id: text("store_id").notNull(),
-    quantity: text("quantity").notNull(),
-    total_price: real("total_price").notNull(),
+    item_id: text("item_id").notNull().references(() => item.id, { onDelete: "cascade" }),
+    store_id: text("store_id").notNull().references(() => store.id, { onDelete: "cascade" }),
+    quantity: integer("quantity").notNull(),
+    price_per_unit: real("price_per_unit").notNull(),
+    cost_per_unit: real("cost_per_unit").notNull(),
     method : orderMethodEnum("method").notNull().$type<OrderMethod>(),
     created_at: timestamp("created_at").notNull().defaultNow(),
 });
