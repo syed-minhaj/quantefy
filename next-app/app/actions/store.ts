@@ -3,9 +3,10 @@ import { auth } from "@/app/lib/auth";
 import { headers } from "next/headers";
 import { supabase } from "../lib/supabase";
 import { db } from "../lib/drizzle";
-import { item, store } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { item, order, store } from "@/db/schema";
+import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { OrderMethod } from "../type";
 
 
 const supabaseUrl = process.env.SUPABASE_URL + "/storage/v1/object/public";
@@ -117,4 +118,39 @@ export async function updateItem(name:string , price:number , cost:number , quan
     }
     return {err : null}
 
+}
+
+export async function createOrder(storeID:string , itemID:string , quantity:number , method: OrderMethod , 
+        pricePerUnit:number , costPerUnit:number
+) {
+    const session = await auth.api.getSession({headers: await headers()});
+    if (!session) return {err : "Sign in First"};
+    if(quantity < 0) return {err : "Quantity cannot be negative"};
+    if(pricePerUnit < 0) return {err : "Price cannot be negative"};
+    if(costPerUnit < 0) return {err : "Cost cannot be negative"};
+    
+    const s = await db.select().from(store).where(eq(store.id , storeID));
+    if(s[0].owner_id != session.user.id) return {err : "You are not the owner of this store"};
+    const i = await db.select().from(item).where(eq(item.id , itemID));
+    if(i[0].store_id != storeID) return {err : "item is not in this store"};
+
+    try{
+        await db.insert(order).values({
+            item_id : itemID,
+            store_id: storeID,
+            quantity,
+            price_per_unit : pricePerUnit,
+            cost_per_unit : costPerUnit,
+            method,
+        }).returning({insertedID : order.id});
+
+        await db.update(item).set({quantity : sql`${item.quantity} - ${quantity}`}).where(eq(item.id , itemID));
+            
+        revalidatePath(`/app/store/${storeID}/orders`);
+        
+    }catch(e){
+        console.log(e)
+        return {err : "Failed to create store"}
+    }
+    return {err : null}
 }
