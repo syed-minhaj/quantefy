@@ -34,4 +34,38 @@ type order = {
 
 type OrderMethod = "manual" | "api";
 
-export type { store , item  , OrderMethod , order };
+interface YearlyReportData {
+  storeOverview: {
+    revenue: number;
+    cost: number;
+    profit: number;
+    totalOrders: number;
+  };
+  byMethod: {
+    manual: {
+      revenue: number;
+      cost: number;
+      profit: number;
+      orderCount: number;
+    };
+    api: {
+      revenue: number;
+      cost: number;
+      profit: number;
+      orderCount: number;
+    };
+  };
+  topItems: Array<{
+    itemId: string;
+    itemName: string;
+    itemPicture: string;
+    revenue: number;
+    cost: number;
+    profit: number;
+    quantitySold: number;
+  }>;
+  storeName: string;
+  year: number;
+}
+
+export type { store , item  , OrderMethod , order , YearlyReportData };
