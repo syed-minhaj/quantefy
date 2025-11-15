@@ -1,6 +1,6 @@
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import type { YearlyReportData } from "./report";
+import { YearlyReportData } from "@/app/type";
 
 export function generatePDF(report: YearlyReportData) {
   const doc = new jsPDF();
