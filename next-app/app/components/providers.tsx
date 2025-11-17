@@ -22,7 +22,7 @@ export default function Providers({ children }: { children: ReactNode }) {
                     authClient={authClient}
                     navigate={router.push}
                     replace={router.replace}
-                    redirectTo="/"
+                    redirectTo="/app"
                     onSessionChange={() => {
                         router.refresh()
                     }}
