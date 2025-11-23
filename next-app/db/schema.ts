@@ -14,6 +14,7 @@ export const store = pgTable("store", {
     name: text("name").notNull(),
     description: text("description"),
     logo: text("logo"),
+    webhook_secret: text("webhook_secret").$defaultFn(() => randomUUID()).notNull(),
     owner_id: text("owner_id").notNull().references(() => user.id, { onDelete: "cascade" }),
     created_at: timestamp("created_at").notNull().defaultNow(),
     updated_at: timestamp("updated_at").notNull().defaultNow(),

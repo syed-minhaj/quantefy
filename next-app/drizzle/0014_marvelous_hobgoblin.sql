@@ -1,0 +1,1 @@
+ALTER TABLE "store" RENAME COLUMN "webhook_scheme" TO "webhook_secret";

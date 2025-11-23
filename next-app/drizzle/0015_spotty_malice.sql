@@ -1,0 +1,1 @@
+ALTER TABLE "store" ALTER COLUMN "webhook_secret" SET NOT NULL;
