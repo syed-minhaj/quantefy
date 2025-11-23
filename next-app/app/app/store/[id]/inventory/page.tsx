@@ -26,7 +26,7 @@ async function Main({storeID}:{storeID:string}) {
                     <Item item={item} />
                 ))}
             </div>
-            <ItemDetals storeID={storeID} items={items} />
+            <ItemDetals storeID={storeID} webhookSecret={stores[0].webhook_secret} items={items} />
         </div>
     )
 }
@@ -51,7 +51,7 @@ export default async function Inventory({params}:{params:any}) {
     const { id } = await params;
     return (
         <div className="flex flex-col gap-4 w-full px-4 overflow-x-hidden">
-            <div className="flex flex-row items-center">
+            <div className="flex flex-col  gap-4">
                 <h1 className="text-xl font-semibold">Inventory</h1>
                 <AddItem storeID={id} />
             </div>
