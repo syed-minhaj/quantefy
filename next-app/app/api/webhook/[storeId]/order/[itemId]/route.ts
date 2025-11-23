@@ -37,7 +37,7 @@ async function createOrder(storeID:string , itemID:string , quantity:number  ,
 
 export async function POST(
     req: Request,
-    { params }: { params: { storeId: string; itemId: string } }
+    { params }: { params: Promise<{ storeId: string; itemId: string; }> }
 ){
     try{
         const { storeId, itemId } = await params;
