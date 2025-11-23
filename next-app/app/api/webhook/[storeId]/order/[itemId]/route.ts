@@ -60,11 +60,3 @@ export async function POST(
         return new Response("Failed to create order");
     }
 }
-
-export async function GET(
-    req: Request,
-    { params }: { params: { storeId: string; itemId: string } }
-){
-    const { storeId, itemId } = await params;
-    return new Response(`Store ${storeId} item ${itemId} webhook`);
-}
