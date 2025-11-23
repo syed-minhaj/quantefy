@@ -8,8 +8,9 @@ import { useRef, useEffect, useState } from "react";
 import { item } from "@/app/type";
 import { updateItem } from "@/app/actions/store";
 import { toast } from "sonner";
+import Webhook from "./webhook";
 
-export default function ItemDetals({storeID , items}:{storeID:string , items:item[]}) {
+export default function ItemDetals({storeID , webhookSecret , items}:{storeID:string , webhookSecret:string , items:item[]}) {
     const {hash , updateHash} = useHash("")
     const [name, setName] = useState(items.find((item:any) => item.id == hash)?.name)
     const [price, setPrice] = useState(items.find((item:any) => item.id == hash)?.sale_price)
@@ -17,6 +18,7 @@ export default function ItemDetals({storeID , items}:{storeID:string , items:ite
     const [quantity, setQuantity] = useState(items.find((item:any) => item.id == hash)?.quantity)
     const [picture, setPicture] = useState(items.find((item:any) => item.id == hash)?.picture)
     const [updating, setUpdating] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const componentRef = useRef<HTMLDivElement>(null);
 
@@ -29,11 +31,14 @@ export default function ItemDetals({storeID , items}:{storeID:string , items:ite
             setPicture(items.find((item:any) => item.id == hash)?.picture);
         }
 
+        const webhookComponent = document.getElementById("webhookComponent");
+        console.log(webhookComponent)
         const handleClickOutside = async (event:MouseEvent) => {
-            if (hash != "" && !componentRef.current?.contains(event.target  as Node)) {
+            if (!open && hash != "" && (!componentRef.current?.contains(event.target  as Node))) {
                 console.log('Clicked outside the div!');
                 updateHash("")
             }
+            
         };
 
         document.addEventListener('click', handleClickOutside);
@@ -41,7 +46,7 @@ export default function ItemDetals({storeID , items}:{storeID:string , items:ite
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [hash])
+    }, [hash , open])
 
     function add(){
         if(!name || name == "" || price == null || cost == null || quantity == null || picture == null) {
@@ -64,6 +69,7 @@ export default function ItemDetals({storeID , items}:{storeID:string , items:ite
     }
 
     return (
+        <>
         <div className={`overflow-x-hidden transform right-0 top-0  ${hash != "" ? "" : " translate-x-[120%]"} fixed
             transition-transform duration-300 ease-in-out z-200 h-screen w-screen sm:w-auto p-4 `}>
             <div className={`flex flex-col gap-4 w-full sm:w-96 h-full rounded-r1 border border-input bg-bg2 relative  
@@ -89,10 +95,19 @@ export default function ItemDetals({storeID , items}:{storeID:string , items:ite
                     <Input type="number" value={quantity} onChange={(e) => {setQuantity(Number(e.target.value))}} 
                      className="w-24 disabled:opacity-50" disabled={updating} min={0}/>
                 </div>
+                <div className="flex flex-row items-center gap-2">
+                    <span className="font-medium">Webhook</span>
+                    <Button className="flex-1" onClick={() => setOpen(true)} >
+                        Link
+                    </Button>
+                </div>
+
                 <Button className="mt-auto disabled:opacity-50" onClick={() => add()} disabled={updating}>
                     Save
                 </Button>
             </div>
         </div>
+        {open && <Webhook setOpen={setOpen} secret={webhookSecret} storeID={storeID} itemID={hash} />}
+        </>
     )
 }
