@@ -1,4 +1,7 @@
 
+import { ChartBarLabel } from "./app/store/[id]/dashboard/components/barchart";
+import { Info } from "./app/store/[id]/dashboard/components/info";
+import { RevenueChart } from "./app/store/[id]/dashboard/components/revenueChart";
 import { LandingPageNavbar as Navbar } from "./components/Navbar";
 
 interface FeatureCardProps {
@@ -17,6 +20,48 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description, col
         <p className="text-sm text-muted-foreground">{description}</p>
     </div>
 );
+
+const dummyRevenueData  = [
+    {
+        date: "2022-12-01",
+        revenue: 1000,
+    },
+    {
+        date: "2023-01-02",
+        revenue: 2000,
+    },
+    {
+        date: "2023-02-03",
+        revenue: 3500,
+    },
+    {
+        date: "2023-03-04",
+        revenue: 4000,
+    },
+    {
+        date: "2023-04-05",
+        revenue: 2000,
+    },
+    {
+        date: "2023-05-06",
+        revenue: 6000,
+    }
+]
+
+const dummyChartData = [
+    {
+        item: "Item 1",
+        revenue: 1000,
+    },
+    {
+        item: "Item 2",
+        revenue: 2000,
+    },
+    {
+        item: "Item 3",
+        revenue: 300,
+    }
+]
 
 export default function Home() {
   const GradientText = ({ children }: { children: React.ReactNode }) => (
@@ -50,7 +95,7 @@ export default function Home() {
                         Explore Features
                     </a>
                 </div>
-                
+
                 <div className="mt-20 relative mx-auto max-w-5xl">
                     <div className="absolute -inset-1 bg-gradient-to-r from-chart-1 to-chart-2 rounded-xl blur opacity-20"></div>
                     <div className="relative bg-card rounded-xl border border-border shadow-2xl overflow-hidden">
@@ -59,19 +104,17 @@ export default function Home() {
                             <div className="w-3 h-3 rounded-full bg-chart-4"></div>
                             <div className="w-3 h-3 rounded-full bg-chart-3"></div>
                         </div>
-                        <div className="p-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-                            <div className="col-span-1 space-y-4">
-                                <div className="h-24 bg-secondary rounded-lg p-4">
-                                    <div className="text-primary font-bold text-2xl">1,240</div>
-                                    <div className="text-sm text-muted-foreground">Total Orders</div>
-                                </div>
-                                <div className="h-24 bg-secondary rounded-lg p-4">
-                                    <div className="text-primary font-bold text-2xl">3 Stores</div>
-                                    <div className="text-sm text-muted-foreground">Active Locations</div>
-                                </div>
+                        
+                        <div className="flex flex-col gap-4 scale-90  ">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <Info heading="Number of Items" value={"13"} />
+                                <Info heading="Revenue" value={"$16000"} />
+                                <Info heading="Profit" value={"$7300"} />
+                                <Info heading="Low Stock" value={"6"} />
                             </div>
-                            <div className="col-span-2 bg-secondary rounded-lg border-2 border-dashed border-border flex items-center justify-center text-muted-foreground min-h-[200px]">
-                                Dashboard Analytics Visualization
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <RevenueChart data={dummyRevenueData} />
+                                <ChartBarLabel chartData={dummyChartData} />
                             </div>
                         </div>
                     </div>
