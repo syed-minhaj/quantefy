@@ -177,3 +177,8 @@
     opacity: 0.15;
     z-index: -1;
 }
+
+::selection {
+  color: white; 
+  background-color: rgba(10, 167, 114, 0.486);
+}
