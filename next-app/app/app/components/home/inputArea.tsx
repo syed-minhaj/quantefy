@@ -16,7 +16,7 @@ export default function InputArea() {
     return (
         <div className="flex flex-row gap-2 w-full mt-16">
             <Input placeholder="Search" className="flex-1 bg-bg2 rounded-r1 "/>
-            <Button className="rounded-r1" variant={"default"} onClick={() => setOpen(!open)}>
+            <Button className="rounded-r1" variant={"default"} onClick={() => setOpen(!open)} id="addStore">
                 Add Store
             </Button>
             <CreateStore open={open} setOpen={setOpen}/>
