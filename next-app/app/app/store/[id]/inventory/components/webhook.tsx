@@ -30,7 +30,7 @@ export default function Webhook({ setOpen , secret , storeID , itemID }:{setOpen
     "cost": 120\n}`
 
     return (
-        <div className={`z-200 fixed top-0 left-0 w-screen h-screen bg-black/50 dark:bg-white/10 flex items-center justify-center z-100`}  >
+        <div className={`z-200 fixed top-0 left-0 w-screen h-screen bg-black/50 dark:bg-gray-800/50 flex items-center justify-center z-100`}  >
             <div id={"webhookComponent"}
                 className={` w-120 h-5/6 overflow-y-scroll rounded-r1 bg-bg1 relative p-4 flex flex-col gap-4 z-110`} ref={formRef} >
                 <X className="m-4 absolute top-0 right-0 opacity-50 hover:opacity-100 " size={16} onClick={() => setOpen(!open)}/>
