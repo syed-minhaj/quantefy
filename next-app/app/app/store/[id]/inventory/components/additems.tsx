@@ -61,7 +61,7 @@ export default function AddItem({storeID}:{storeID:string}) {
     return (
         <>
             <Button className="rounded-r1 ml-auto" variant={"default"} onClick={() => setOpen(!open)} id="addItem">
-                    Add Store
+                    Add Item
             </Button>
             <div className={`${open ? "fixed" : "hidden"} top-0 left-0 w-screen h-screen bg-black/50 flex items-center justify-center z-100`}  >
                 <div className={` w-120 h-5/6 rounded-r1 bg-bg1 relative p-4 flex flex-col gap-4 z-110`} ref={formRef} >
