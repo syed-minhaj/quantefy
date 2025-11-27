@@ -31,6 +31,9 @@ export default function ItemDetals({storeID , webhookSecret , items}:{storeID:st
             setPicture(items.find((item:any) => item.id == hash)?.picture);
         }
 
+        if (hash != "" || open) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = 'auto';
+
         const webhookComponent = document.getElementById("webhookComponent");
         console.log(webhookComponent)
         const handleClickOutside = async (event:MouseEvent) => {
@@ -47,6 +50,11 @@ export default function ItemDetals({storeID , webhookSecret , items}:{storeID:st
             document.removeEventListener('click', handleClickOutside);
         };
     }, [hash , open])
+
+    useEffect(()=>{
+        // when open disable html and body scroll
+        
+    }, [open])
 
     function add(){
         if(!name || name == "" || price == null || cost == null || quantity == null || picture == null) {

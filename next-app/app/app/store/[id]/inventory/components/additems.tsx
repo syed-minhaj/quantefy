@@ -58,6 +58,11 @@ export default function AddItem({storeID}:{storeID:string}) {
         };
     }, [])
 
+    useEffect(()=>{
+        if(open) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = 'auto';
+    }, [open])
+
     return (
         <>
             <Button className="rounded-r1 ml-auto" variant={"default"} onClick={() => setOpen(!open)} id="addItem">
