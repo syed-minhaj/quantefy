@@ -8,6 +8,12 @@ import { useEffect, useState } from "react";
 
 const ThemeSwitcher = dynamic(() => import("./navbar/ThemeSwitch"), { ssr: false });
 
+export const Logo = () => {
+    return (
+        <span className="text-xl font-bold tracking-tight text-foreground">Quantefy</span>
+    )
+}
+
 export const LandingPageNavbar = () => {
     const [isVisible, setIsVisible] = useState(true);
     
@@ -43,9 +49,7 @@ export const LandingPageNavbar = () => {
     return (
         <nav className={navClasses}>
             <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold tracking-tight text-foreground">Quantefy</span>
-                </div>
+                <Logo/>
                 <div className="hidden md:flex gap-8 text-sm font-medium text-muted-foreground">
                     <a href="#features" className="hover:text-primary transition">Features</a>
                     <a href="#api" className="hover:text-primary transition">API & Webhooks</a>
@@ -67,10 +71,7 @@ export   function Navbar() {
 
 
     return (
-        <nav className="flex flex-row items-center justify-center h-16 px-4 ">
-            <Link href={"/app"} >
-                {/* <Logo /> */}
-            </Link>
+        <nav className="flex flex-row items-center justify-center h-16 px-4 absolute top-0 right-0 ">
             <div className="ml-auto gap-4 flex flex-row">
                 <ThemeSwitcher/>
                 <UserButton className="z-80" size={"icon"}  /> 
@@ -86,7 +87,6 @@ export  function HomeNavbar() {
     
     return (
         <nav className="flex flex-row items-center justify-center h-16 px-4">
-            {/* <Logo /> */}
             <div className="ml-auto gap-4 flex flex-row">
                 <Link className="" href='/app/fields' >
                     <Button variant={"link"}>Try Now</Button>

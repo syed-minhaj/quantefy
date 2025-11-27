@@ -1,6 +1,6 @@
 
 import { store } from "@/db/schema";
-import { Navbar } from "../components/Navbar"
+import { Logo, Navbar } from "../components/Navbar"
 import { db } from "../lib/drizzle";
 import InputArea from "./components/home/inputArea"
 import { headers } from "next/headers";
@@ -38,6 +38,9 @@ export default async function Home() {
         <>
             <Navbar />
             <div className="flex flex-col w-11/12 mx-auto gap-6 ">
+                <div className="fixed top-0 h-16 flex items-center">
+                    <Logo/>
+                </div>
                 <InputArea />
                 <h2 className="ml-1 font-semibold text-xl ">
                     Stores

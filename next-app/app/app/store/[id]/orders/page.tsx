@@ -95,7 +95,7 @@ export default async function Orders({params}:{params:any}) {
     const { id } = await params;
     return (
         <div className="flex flex-col gap-4 w-full px-4 overflow-x-hidden">
-            <div className="flex flex-row items-center ">
+            <div className="flex flex-col  gap-4 ">
                 <h1 className="text-xl font-semibold">Orders</h1>
                 <Suspense fallback={<div/>}>
                     <NewOrderS storeID={id} />
