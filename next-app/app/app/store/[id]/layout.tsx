@@ -16,7 +16,7 @@ export default async function StoreLayout({
             <Providers>
                 <SideBar store={id} />
                 <div className="flex flex-col flex-1">
-                    <div className="min-h-screen  ">
+                    <div className="min-h-screen py-4 ">
                         <Navbar />
                         {children}
                     </div>
