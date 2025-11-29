@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Quantefy",
   description: "Inventory management for modern brands",
   icons: {
-    icon: "/icon.png",
+    icon: "/icon.svg",
   }
 };
 
