@@ -79,7 +79,7 @@ export default function ItemDetals({storeID , webhookSecret , items}:{storeID:st
     return (
         <>
         <div className={`overflow-x-hidden transform right-0 top-0  ${hash != "" ? "" : " translate-x-[120%]"} fixed
-            transition-transform duration-300 ease-in-out z-200 h-screen w-screen sm:w-auto p-4 `}>
+            transition-transform duration-300 ease-in-out z-200 h-screen w-screen sm:w-auto sm:p-4 `}>
             <div className={`flex flex-col gap-4 w-full sm:w-96 h-full rounded-r1 border border-input bg-bg2 relative  
             p-4 `} ref={componentRef}>
                 <X onClick={() => updateHash("")} className="absolute right-0 top-0 m-4 opacity-50 hover:opacity-100 " size={16}/>
