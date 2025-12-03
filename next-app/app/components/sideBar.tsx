@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {LayoutDashboard , ClipboardList ,Package , FileSpreadsheet , MoveLeft  } from "lucide-react"
+import { Logo } from "./Navbar";
  
 const Pages = ["dashboard", "orders", "inventory", "report"]
 
@@ -24,7 +25,7 @@ export default function SideBar({store}:{store:string}) {
     return (
         <div className={`${open ? "w-60" : "w-17.5"} hidden sticky top-0 h-screen bg-bg2 sm:flex flex-col  transition-[width] duration-300 ease-in-out sideBar-parent  `}>
             <div className="h-16 flex flex-row pt-4 pl-6">
-                <h1 className={`font-bold ${open ? "w-32" : "w-0"} overflow-hidden transition-[width] duration-300 ease-in-out logo `}>Quantefy</h1>
+                <h1 className={`font-bold ${open ? "w-32" : "w-0"} overflow-hidden transition-[width] duration-300 ease-in-out logo `}><Logo/></h1>
                 <MoveLeft className={` absolute right-5.75 p-1 text-black/85 dark:text-white/85 border border-black/20 dark:border-white/20 rounded  ${open ? "" : "rotate-180 "} `} 
                 onClick={() => setOpen(!open)} />
             </div>
