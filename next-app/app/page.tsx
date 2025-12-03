@@ -105,7 +105,8 @@ export default function Home() {
                             <div className="w-3 h-3 rounded-full bg-chart-3"></div>
                         </div>
                         
-                        <div className="flex flex-col gap-4 scale-90  ">
+                        <div className="flex flex-col gap-4 scale-90 text-left ">
+                            <h1 className="text-xl font-semibold w-full">Dashboard</h1>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <Info heading="Number of Items" value={"13"} />
                                 <Info heading="Revenue" value={"$16000"} />
