@@ -41,7 +41,9 @@ export default async function Home() {
                 <div className="fixed top-0 h-16 flex items-center">
                     <Logo/>
                 </div>
-                <InputArea />
+                <Suspense fallback={<div/>}>
+                    <InputArea />
+                </Suspense>
                 <h2 className="ml-1 font-semibold text-xl ">
                     Stores
                 </h2>
