@@ -19,7 +19,7 @@ export default function BottomBar({store}:{store:string}) {
     const pathname = usePathname()
 
     return (
-        <div className="sm:hidden flex flex-row w-full h-16 bg-bg2 sticky bottom-0 justify-around items-center ">
+        <div className="sm:hidden flex flex-row w-full h-16 px-4 bg-bg2 sticky bottom-0 justify-between items-center border-t border-black/20 dark:border-white/20">
             {Pages.map((page, index) => (
                 <Link href={`/app/store/${store}/${page}`} key={index} 
                     className={`  rounded-r1 border flex flex-col items-center text-sm 
