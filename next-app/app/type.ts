@@ -1,4 +1,14 @@
 
+type user = {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    email: string;
+    emailVerified: boolean;
+    name: string;
+    image?: string | null | undefined;
+}
+
 type store = {
     id: string;
     name: string;
@@ -68,4 +78,4 @@ interface YearlyReportData {
   year: number;
 }
 
-export type { store , item  , OrderMethod , order , YearlyReportData };
+export type { store , item  , OrderMethod , order , YearlyReportData , user };
