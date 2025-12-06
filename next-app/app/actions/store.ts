@@ -151,7 +151,7 @@ export async function createOrder(storeID:string , itemID:string , quantity:numb
 
         const subscribers = await db.select().from(notificationRecipient).where(eq(notificationRecipient.store_id,storeID));
         const subscription = await db.select({deviceSubscriptions : user.deviceSubscriptions}).from(user).where(eq(user.id,subscribers[0].user_id));
-        fetch(`http://localhost:3000/api/send-notification` , {
+        fetch(`${process.env.BETTER_AUTH_URL}/api/send-notification` , {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json",
