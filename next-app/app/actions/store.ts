@@ -3,10 +3,11 @@ import { auth } from "@/app/lib/auth";
 import { headers } from "next/headers";
 import { supabase } from "../lib/supabase";
 import { db } from "../lib/drizzle";
-import { item, order, store } from "@/db/schema";
+import { item, order, store,notificationRecipient } from "@/db/schema";
 import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { OrderMethod } from "../type";
+import { user } from "@/db/auth-schema";
 
 
 const supabaseUrl = process.env.SUPABASE_URL + "/storage/v1/object/public";
@@ -147,6 +148,20 @@ export async function createOrder(storeID:string , itemID:string , quantity:numb
         await db.update(item).set({quantity : sql`${item.quantity} - ${quantity}`}).where(eq(item.id , itemID));
             
         revalidatePath(`/app/store/${storeID}/orders`);
+
+        const subscribers = await db.select().from(notificationRecipient).where(eq(notificationRecipient.store_id,storeID));
+        const subscription = await db.select({deviceSubscriptions : user.deviceSubscriptions}).from(user).where(eq(user.id,subscribers[0].user_id));
+        fetch(`http://localhost:3000/api/send-notification` , {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json",
+            },
+            body : JSON.stringify({
+                subscribers : subscription[0].deviceSubscriptions,
+                title : "New Order",
+                body : `New order has been placed for ${quantity} items worth ${pricePerUnit * quantity} `
+            })
+        })
         
     }catch(e){
         console.log(e)
