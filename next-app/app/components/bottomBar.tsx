@@ -1,16 +1,17 @@
 "use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {LayoutDashboard , ClipboardList ,Package , FileSpreadsheet   } from "lucide-react"
+import {LayoutDashboard , ClipboardList ,Package , FileSpreadsheet, Settings   } from "lucide-react"
 import { UserButton } from "@daveyplate/better-auth-ui"
  
-const Pages = ["dashboard", "orders", "inventory", "report"]
+const Pages = ["dashboard", "orders", "inventory", "report" , "settings"]
 
 const IconComponent = ({page}:{page : string}) => {
     if(page == "dashboard") return <LayoutDashboard size={20} className="font-medium"/>
     else if(page == "orders") return <ClipboardList size={20}/>
     else if(page == "inventory") return <Package size={20}/>
     else if(page == "report") return <FileSpreadsheet size={20}/>
+    else if(page == "settings") return <Settings size={20}/>
     else return <div className="h-5 w-5"/>
 }
 

@@ -2,10 +2,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import {LayoutDashboard , ClipboardList ,Package , FileSpreadsheet , MoveLeft  } from "lucide-react"
+import {LayoutDashboard , ClipboardList ,Package , FileSpreadsheet , MoveLeft, Settings  } from "lucide-react"
 import { Logo } from "./Navbar";
  
-const Pages = ["dashboard", "orders", "inventory", "report"]
+const Pages = ["dashboard", "orders", "inventory", "report" , "settings"]
 
 
 const IconComponent = ({page}:{page : string}) => {
@@ -13,6 +13,7 @@ const IconComponent = ({page}:{page : string}) => {
     else if(page == "orders") return <ClipboardList size={20}/>
     else if(page == "inventory") return <Package size={20}/>
     else if(page == "report") return <FileSpreadsheet size={20}/>
+    else if(page == "settings") return <Settings size={20}/>
     else return <div className="h-5 w-5"/>
 }
 
