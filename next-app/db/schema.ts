@@ -1,7 +1,7 @@
 
 //export const schema = null
 
-import { relations } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { pgTable, text, timestamp , integer, real, pgEnum } from "drizzle-orm/pg-core";
 import { user } from "./auth-schema";
 import { randomUUID } from "crypto";
@@ -23,7 +23,16 @@ export const store = pgTable("store", {
 export const storeRelation = relations(store , ({many}) =>({
     items: many(item),
     orders: many(order),
+    notificationRecipients: many(notificationRecipient),
 }));
+
+export const notificationRecipient = pgTable("notificationRecipient", {
+    id: text("id").primaryKey().$defaultFn(() => randomUUID()),
+    store_id: text("store_id").notNull().references(() => store.id, { onDelete: "cascade" }),
+    user_id: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+    created_at: timestamp("created_at").notNull().defaultNow(),
+    updated_at: timestamp("updated_at").notNull().defaultNow(),
+});
 
 export const item = pgTable("item", {
     id: text("id").primaryKey().$defaultFn(() => randomUUID()),

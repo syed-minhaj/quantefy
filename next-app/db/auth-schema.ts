@@ -1,4 +1,6 @@
+import { relations, sql } from "drizzle-orm";
 import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { notificationRecipient } from "./schema";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -7,11 +9,19 @@ export const user = pgTable("user", {
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  deviceSubscriptions: text("device_subscriptions")
+    .notNull()
+    .array()
+    .default(sql`'{}'::text[]`),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
+
+export const userRelation = relations(user , ({many}) =>({
+  notificationRecipients: many(notificationRecipient),
+}));
 
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
