@@ -20,10 +20,8 @@ export default function NewOrder({items,storeID}:{items:item[],storeID:string}) 
 
     useEffect(() => {
         const handleClickOutside = async (event:MouseEvent) => {
-            if (!formRef.current?.contains(event.target  as Node) && event.target != document.getElementById("newOrder") 
-                && document.getElementById("select")?.contains(event.target  as Node)) {
+            if (event.target == document.getElementById("background")) {
                 setOpen(false);
-                console.log(formRef.current?.contains(event.target  as Node), event.target);
             }
         };
         document.addEventListener('click', handleClickOutside);
@@ -88,7 +86,7 @@ export default function NewOrder({items,storeID}:{items:item[],storeID:string}) 
             <Button className="rounded-r1 ml-auto" variant={"default"} onClick={() => setOpen(!open)} id="newOrder">
                 New
             </Button>
-            <div className={`${open ? "fixed" : "hidden"} top-0 left-0 w-screen h-screen bg-black/50 dark:bg-gray-800/50 flex items-center justify-center z-100`}  >
+            <div className={`${open ? "fixed" : "hidden"} top-0 left-0 w-screen h-screen bg-black/50 dark:bg-gray-800/50 flex items-center justify-center z-100`} id="background"  >
                 <div className={`w-full h-full sm:w-120 sm:h-5/6 rounded-r1 bg-bg1 relative p-4 flex flex-col gap-4 z-110`} ref={formRef} >
                     <X className="m-4 absolute top-0 right-0 opacity-50 hover:opacity-100 " size={16} onClick={() => setOpen(!open)}/>
                     <h2 className="font-medium ml-1 ">New Order</h2>
