@@ -77,7 +77,7 @@ export default function NewOrder({items,storeID}:{items:item[],storeID:string}) 
                 <Image src={item.picture} alt="logo" width={256} height={192} className="rounded-r1 bg-bg1 h-16 w-16 object-contain border border-input" />
                 <div className="flex flex-col gap-2">
                     <span className="font-medium">{item.name}</span>
-                    <span className="text-sm">{item.created_at.getMonth()}</span>
+                    <span className="text-sm">Stock left: {item.quantity}</span>
                 </div>
             </div>
         )
