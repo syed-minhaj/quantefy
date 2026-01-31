@@ -16,6 +16,7 @@ export default function AddItem({storeID}:{storeID:string}) {
     const [picture, setPicture] = useState<File | null>(null);
     const [adding, setAdding] = useState(false);
     const formRef = useRef<HTMLDivElement>(null);
+    const pictureInputRef = useRef<HTMLInputElement>(null);
 
 
     function add(){
@@ -37,6 +38,7 @@ export default function AddItem({storeID}:{storeID:string}) {
                 setCost(undefined);
                 setQuantity(0);
                 setPicture(null);
+                if (pictureInputRef.current) pictureInputRef.current.value = "";
             }
             toast.dismiss("addItem");
             setAdding(false);
@@ -85,7 +87,7 @@ export default function AddItem({storeID}:{storeID:string}) {
                         <Input placeholder="Quantity" type="number"  className="bg-bg2 rounded-r1 disabled:opacity-50 " disabled={adding} required
                             onChange={(e) => setQuantity(Number(e.target.value))} value={quantity}/>
                         <span className={`ml-1 text-sm font-medium ${adding ? "opacity-50" : ""}`} >Image</span>
-                        <Input placeholder="Logo" type="file" disabled={adding} 
+                        <Input placeholder="Logo" type="file" disabled={adding} ref={pictureInputRef}
                             onChange={(e) => {e.target.files ? setPicture(e.target.files[0]) : null}} className="bg-bg2 rounded-r1 disabled:opacity-50 "/>
                         {picture &&
                             <img src={picture ? URL.createObjectURL(picture) : ""}  alt="image" className="rounded-r1 bg-bg2 h-24 w-24 object-contain border border-input "/>
