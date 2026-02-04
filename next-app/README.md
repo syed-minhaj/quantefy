@@ -3,7 +3,7 @@ Quantefy: Modern Open-Source Inventory Management PWA
 
 Quantefy is an open-source, Progressive Web Application (PWA) designed to streamline inventory and order management for modern brands with multiple store locations. Built with scalability and developer flexibility in mind, it provides real-time stock tracking and automates order processing via a powerful API and webhooks.
 
-🌟 Features
+Features
 -----------
 
 *   **Progressive Web App (PWA):** Installable on desktop and mobile devices for fast, reliable.
